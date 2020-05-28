@@ -21,6 +21,9 @@ void main()
 	double F[2];
 	double X1[2];
 	int n;
+	FILE *fw;
+	fw=fopen("wyniki.txt","w");
+	fprintf(fw,"x\t\tv\t\tE\t\tt\n");
 	printf("Podaj krok calkowania:\n");
 	scanf("%lf",&h);
 	printf("Podaj poczatkowe wychylenie:\n");
@@ -47,6 +50,8 @@ void main()
 			title("t","x","");
 			for(double t=0.;t<=20.;t+=h)
 			{	
+				energia(X,&Ec,&Ep,&Ek);
+				fprintf(fw,"%lf\t%lf\t%lf\t%lf\n",X[0],X[1],Ec,t);
 				setgray(1.);
 				point(t,0);
 				setcolor(0.);
@@ -61,6 +66,8 @@ void main()
 			title("t","v","");
 			for(double t=0.;t<=20.;t+=h)
 			{
+				energia(X,&Ec,&Ep,&Ek);
+				fprintf(fw,"%lf\t%lf\t%lf\t%lf\n",X[0],X[1],Ec,t);
 				setgray(1.);
 				point(t,0);
 				setcolor(0.);
@@ -71,11 +78,12 @@ void main()
 			}
 			break;
 		case 2:
-			scale(0, 0, 20, 20);
+			scale(0, 0, 20, 18);
 			title("t","E","Energia calkowita ukladu");
 			for(double t=0.;t<=20.;t+=h)
 			{
 				energia(X,&Ec,&Ep,&Ek);
+				fprintf(fw,"%lf\t%lf\t%lf\t%lf\n",X[0],X[1],Ec,t);
 				setcolor(0.5);
 				point(t,Ec);
 				vrk4(t,X,h,2,rhs_fun,X1);
@@ -88,6 +96,8 @@ void main()
 			title("x","v","");
 			for(double t=0.;t<=20.;t+=h)
 			{
+				energia(X,&Ec,&Ep,&Ek);
+				fprintf(fw,"%lf\t%lf\t%lf\t%lf\n",X[0],X[1],Ec,t);
 				setcolor(0.);
 				point(X[0],X[1]);
 				vrk4(t,X,h,2,rhs_fun,X1);
