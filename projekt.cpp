@@ -117,6 +117,6 @@ void rhs_fun(double t,double *X, double *F)
 void energia(double *X,double *Ec, double *Ep, double *Ek)
 {
 	*Ep=m*pow(X[1],2)/2;
-	*Ek=k1*pow(X[0],2)/2+k2*pow(X[0],4)/4;
+	*Ek=k1*pow(X[0],2)/2+k1*k2*pow(X[0],4)/4;
 	*Ec=*Ep+*Ek;
 }
